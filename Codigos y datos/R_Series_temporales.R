@@ -45,10 +45,6 @@ wday(mytimepoint, label=TRUE, abbr=FALSE) # los niveles que considera sin abrevi
 with_tz(mytimepoint, tz = "Europe/London") # una hora menos en Londres
 mytimepoint
 
-# Calculando el intervalo entre dos fechas
-time1 <- ymd_hm("1993-11-23 11:23", tz = "Europe/Madrid")
-time2 <- ymd_hm("1995-11-02 10:23", tz = "Europe/Madrid")
-myinterval <- interval(time1, time2); myinterval
 
 # Otra forma de convertir a formato fecha
 c <- as.Date("2019-12-25") # Y M D
@@ -63,7 +59,7 @@ a
 
 # Creamos un vector de tiempos con diferentes formatos
 b <- c("22 4 5", "04;09;45", "11:9:56", "23,15,12", "14 16 34", "8 8 23", "21 16 14")
-b <- hms(b) # Lo convertimos usando la función ymd
+b <- hms(b) # Lo convertimos usando la función hms
 b
 
 # Otra función
@@ -133,7 +129,10 @@ mytimeseries <- ts(data = mydata,
 time(mytimeseries)
 plot(mytimeseries)
 
-
+# Y ahora con meses (frecuencia 12)
+mytimeseries <- ts(data = mydata, 
+                   start = c(1956,10), frequency = 12)
+mytimeseries
 
 
 ######### Ejercicio 4: Gráficos
@@ -229,7 +228,7 @@ mytsclean <- tsclean(myts)
 plot(mytsclean) # datos limpios sin picos ni valores faltantes
 summary(mytsclean)
 
-# Adicional: ¿Esta serie será estacionaria?
+# Adicional: ¿Esta serie será estacionaria? 
 # Dickey Fuller Test (Estacionariedad) 
 adf.test(mytsclean) 
 # Intepretación
